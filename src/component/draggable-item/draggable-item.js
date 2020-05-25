@@ -7,18 +7,14 @@ class DraggableItem extends React.Component {
     const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
     return (
       <div className="draggable-container">
-        <Draggable handle="strong" {...dragHandlers}>
+        <Draggable handle=".drag-here" {...dragHandlers}>
           <div className="box">
-            <strong
-              className="drag-cursor"
-              //   onClick={() => this.onClick()}
-              //   style={{ width: this.state.width }}
-            >
-              <div className="drag-here">Drag here</div>
+            <strong className="drag-cursor">
+              <div className="drag-here">Drag Here</div>
             </strong>
             <iframe
-              width="600"
-              height="600"
+              width={this.props.width}
+              height={this.props.height}
               src="https://www.youtube.com/embed/FSs_JYwnAdI"
             ></iframe>
           </div>

@@ -6,7 +6,7 @@ import Draggable from "react-draggable";
 class App extends React.Component {
   state = {
     activeDrags: 0,
-    width: 500,
+    width: 600,
     height: 400,
   };
 
@@ -27,7 +27,9 @@ class App extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     if (this.width.value !== "") {
-      this.setState({ width: this.width.value });
+      this.setState({ width: this.width.value }, () =>
+        console.log(this.state.width)
+      );
     }
 
     if (this.height.value !== "") {
@@ -67,7 +69,7 @@ class App extends React.Component {
           </div>
         </Draggable> */}
 
-        <DraggableItem />
+        <DraggableItem width={this.state.width} height={this.state.height} />
       </div>
     );
   }

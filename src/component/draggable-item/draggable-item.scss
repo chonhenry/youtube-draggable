@@ -1,0 +1,17 @@
+.draggable-container {
+  width: 300px;
+  .drag-cursor {
+    .drag-here {
+      cursor: all-scroll;
+      width: 100px;
+      background: gray;
+      color: white;
+      font-size: 20px;
+      padding: 5px 20px;
+    }
+
+    iframe {
+      border: none;
+    }
+  }
+}
