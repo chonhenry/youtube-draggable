@@ -5,7 +5,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <div className="navbar">
-        <div className="choose-video">
+        {/* <div className="choose-video">
           <div className="title">Video Number</div>
           <select>
             <option>1</option>
@@ -13,17 +13,24 @@ class Navbar extends React.Component {
             <option>3</option>
             <option>4</option>
           </select>
-        </div>
+        </div> */}
 
         <div className="video-qty">
           <div className="title">Number of Video</div>
-          <input
+          {/* <input
             className="video-qty-input"
             type="number"
             defaultValue="1"
             min="1"
             max="4"
-          />
+          /> */}
+          <div className="add-btn">Add</div>
+        </div>
+
+        <div className="select-video">
+          <div className="title">
+            Press <i class="fas fa-arrows-alt"></i> to move and select video
+          </div>
         </div>
 
         <div className="adj width-adj">

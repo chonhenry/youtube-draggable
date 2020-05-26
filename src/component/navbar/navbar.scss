@@ -3,10 +3,12 @@
   display: flex;
   justify-content: center;
 
-  .choose-video {
+  .select-video {
     background: yellow;
     text-align: center;
     margin: 5px 30px;
+    display: flex;
+    align-items: center;
   }
 
   .video-qty {
@@ -14,8 +16,15 @@
     text-align: center;
     margin: 5px 30px;
 
-    .video-qty-input {
+    // .video-qty-input {
+    //   width: 50%;
+    // }
+
+    .add-btn {
       width: 50%;
+      margin: auto;
+      border: 1px solid black;
+      cursor: pointer;
     }
   }
 
