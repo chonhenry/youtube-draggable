@@ -16,7 +16,7 @@ class Navbar extends React.Component {
         </div> */}
 
         <div className="video-qty">
-          <div className="title">Number of Video</div>
+          <div className="title">Add Video (Maximum 4)</div>
           {/* <input
             className="video-qty-input"
             type="number"

@@ -9,6 +9,14 @@ class App extends React.Component {
     width: 600,
     height: 400,
     number_of_video: 1,
+    selected_video: 1,
+    // https://www.youtube.com/embed/FSs_JYwnAdI
+    displayed_video: {
+      video1: "",
+      video2: "",
+      video3: "",
+      video4: "",
+    },
   };
 
   onStart = () => {
@@ -44,11 +52,43 @@ class App extends React.Component {
     this.setState({ height: e.target.value });
   };
 
+  onVideoSelect = () => {};
+
+  renderVideo = (videos) => {
+    let video_arr = [];
+
+    if (this.state.number_of_video === 1) {
+      video_arr.push(
+        <DraggableItem
+          width={this.state.width}
+          height={this.state.height}
+          videoURL={""}
+        />
+      );
+    } else {
+      for (const property in videos) {
+        if (videos[property] !== "") {
+          video_arr.push(
+            <DraggableItem
+              width={this.state.width}
+              height={this.state.height}
+              videoURL={videos[property]}
+            />
+          );
+        }
+      }
+    }
+
+    return video_arr;
+  };
+
   render() {
     return (
       <div className="container">
         <Navbar />
-        <DraggableItem width={this.state.width} height={this.state.height} />
+        <div className="video-container">
+          {this.renderVideo(this.state.displayed_video)}
+        </div>
       </div>
     );
   }
