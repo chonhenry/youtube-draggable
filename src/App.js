@@ -20,29 +20,33 @@ class App extends React.Component {
     // console.log(this.state.activeDrags);
   };
 
-  onClick = () => {
-    // console.log(123);
+  // onSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (this.width.value !== "") {
+  //     this.setState({ width: this.width.value }, () =>
+  //       console.log(this.state.width)
+  //     );
+  //   }
+
+  //   if (this.height.value !== "") {
+  //     this.setState({ height: this.height.value });
+  //   }
+  // };
+
+  onWidthSliderChange = (e) => {
+    console.log(e.target.value);
+    this.setState({ width: e.target.value });
   };
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    if (this.width.value !== "") {
-      this.setState({ width: this.width.value }, () =>
-        console.log(this.state.width)
-      );
-    }
-
-    if (this.height.value !== "") {
-      this.setState({ height: this.height.value });
-    }
+  onHeightSliderChange = (e) => {
+    console.log(e.target.value);
+    this.setState({ height: e.target.value });
   };
 
   render() {
-    const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
-
     return (
       <div className="container">
-        <form onSubmit={(e) => this.onSubmit(e)}>
+        {/* <form onSubmit={(e) => this.onSubmit(e)}>
           <label for="fname">Width:</label>
           <input type="text" ref={(el) => (this.width = el)} />
 
@@ -50,25 +54,26 @@ class App extends React.Component {
           <input type="text" ref={(el) => (this.height = el)} />
 
           <input type="submit" value="Submit" />
-        </form>
+        </form> */}
 
-        {/* <Draggable handle="strong" {...dragHandlers}>
-          <div className="box">
-            <strong
-              className="drag-cursor"
-              onClick={() => this.onClick()}
-              style={{ width: this.state.width }}
-            >
-              <div className="drag-here">Drag here</div>
-            </strong>
-            <iframe
-              width={this.state.width}
-              height={this.state.height}
-              src="https://www.youtube.com/embed/FSs_JYwnAdI"
-            ></iframe>
-          </div>
-        </Draggable> */}
-
+        <input
+          className="width-slider"
+          type="range"
+          min="200"
+          max="1000"
+          step="100"
+          defaultValue="600"
+          onChange={(e) => this.onWidthSliderChange(e)}
+        />
+        <input
+          className="height-slider"
+          type="range"
+          min="200"
+          max="1000"
+          step="100"
+          defaultValue="400"
+          onChange={(e) => this.onHeightSliderChange(e)}
+        />
         <DraggableItem width={this.state.width} height={this.state.height} />
       </div>
     );
