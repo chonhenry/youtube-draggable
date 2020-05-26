@@ -31,7 +31,7 @@ class Navbar extends React.Component {
 
         <div className="select-video">
           <div className="title">
-            Press <i class="fas fa-arrows-alt"></i> to move and select video
+            Press <i className="fas fa-arrows-alt"></i> to move and select video
           </div>
         </div>
 

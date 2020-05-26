@@ -6,22 +6,30 @@ class DraggableItem extends React.Component {
   render() {
     const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
     return (
-      <Draggable handle=".drag-here" {...dragHandlers}>
+      <Draggable
+        handle=".drag-here"
+        {...dragHandlers}
+        onDrag={this.props.handleDrag}
+        positionOffset={{ x: 20, y: 20 }}
+      >
         <div className="draggable-video-container">
           <div className="corner">
             <i
-              class="drag-here fas fa-arrows-alt fa-2x"
-              onClick={() => this.props.onClick(this.props.videoId)}
+              className="drag-here fas fa-arrows-alt fa-2x"
+              onClick={() => this.props.onSelect(this.props.videoId)}
             />
             <form>
               <input
                 className="video-url"
                 type="text"
                 placeholder="Place your Youtube URL here"
-                onClick={() => this.props.onClick(this.props.videoId)}
+                onClick={() => this.props.onSelect(this.props.videoId)}
               />
             </form>
-            <i className="delete fas fa-minus-square fa-2x" />
+            <i
+              className="delete fas fa-minus-square fa-2x"
+              onClick={() => this.props.onDeleteClick(this.props.videoId)}
+            />
           </div>
 
           <iframe
