@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
 import DraggableItem from "./component/draggable-item/draggable-item";
-import Draggable from "react-draggable";
+import Navbar from "./component/navbar/navbar";
 
 class App extends React.Component {
   state = {
     activeDrags: 0,
     width: 600,
     height: 400,
+    number_of_video: 1,
   };
 
   onStart = () => {
@@ -46,34 +47,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        {/* <form onSubmit={(e) => this.onSubmit(e)}>
-          <label for="fname">Width:</label>
-          <input type="text" ref={(el) => (this.width = el)} />
-
-          <label for="fname">Height:</label>
-          <input type="text" ref={(el) => (this.height = el)} />
-
-          <input type="submit" value="Submit" />
-        </form> */}
-
-        <input
-          className="width-slider"
-          type="range"
-          min="200"
-          max="1000"
-          step="100"
-          defaultValue="600"
-          onChange={(e) => this.onWidthSliderChange(e)}
-        />
-        <input
-          className="height-slider"
-          type="range"
-          min="200"
-          max="1000"
-          step="100"
-          defaultValue="400"
-          onChange={(e) => this.onHeightSliderChange(e)}
-        />
+        <Navbar />
         <DraggableItem width={this.state.width} height={this.state.height} />
       </div>
     );
@@ -81,3 +55,15 @@ class App extends React.Component {
 }
 
 export default App;
+
+{
+  /* <form onSubmit={(e) => this.onSubmit(e)}>
+          <label for="fname">Width:</label>
+          <input type="text" ref={(el) => (this.width = el)} />
+
+          <label for="fname">Height:</label>
+          <input type="text" ref={(el) => (this.height = el)} />
+
+          <input type="submit" value="Submit" />
+        </form> */
+}

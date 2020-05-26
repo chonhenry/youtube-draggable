@@ -1,0 +1,27 @@
+.navbar {
+  background-color: red;
+  display: flex;
+  justify-content: center;
+
+  .choose-video {
+    background: yellow;
+    text-align: center;
+    margin: 5px 30px;
+  }
+
+  .video-qty {
+    background: yellow;
+    text-align: center;
+    margin: 5px 30px;
+
+    .video-qty-input {
+      width: 50%;
+    }
+  }
+
+  .adj {
+    background: yellow;
+    text-align: center;
+    margin: 5px 30px;
+  }
+}

@@ -6,20 +6,28 @@ class DraggableItem extends React.Component {
   render() {
     const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
     return (
-      <div className="draggable-container">
-        <Draggable handle=".drag-here" {...dragHandlers}>
-          <div className="box">
-            <strong className="drag-cursor">
-              <div className="drag-here">Drag Here</div>
-            </strong>
-            <iframe
-              width={this.props.width}
-              height={this.props.height}
-              src="https://www.youtube.com/embed/FSs_JYwnAdI"
-            ></iframe>
+      <Draggable handle=".drag-here" {...dragHandlers}>
+        <div className="draggable-video-container">
+          <div className="corner">
+            <i class="drag-here fas fa-arrows-alt fa-2x" />
+            <form>
+              <input
+                className="video-url"
+                type="text"
+                placeholder="Place your Youtube URL here"
+              />
+            </form>
+            <i className="delete fas fa-minus-square fa-2x" />
           </div>
-        </Draggable>
-      </div>
+
+          <iframe
+            className="youtube-video"
+            width={this.props.width}
+            height={this.props.height}
+            src="https://www.youtube.com/embed/FSs_JYwnAdI"
+          ></iframe>
+        </div>
+      </Draggable>
     );
   }
 }
