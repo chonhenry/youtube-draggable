@@ -9,13 +9,13 @@ class App extends React.Component {
     width: 600,
     height: 400,
     number_of_video: 1,
-    selected_video: 1,
+    selected_video: "video1",
     // https://www.youtube.com/embed/FSs_JYwnAdI
     displayed_video: {
-      video1: "",
-      video2: "",
-      video3: "",
-      video4: "",
+      video1: { video_id: 1, url: null },
+      video2: { video_id: 2, url: null },
+      video3: { video_id: 3, url: null },
+      video4: { video_id: 4, url: null },
     },
   };
 
@@ -32,9 +32,7 @@ class App extends React.Component {
   // onSubmit = (e) => {
   //   e.preventDefault();
   //   if (this.width.value !== "") {
-  //     this.setState({ width: this.width.value }, () =>
-  //       console.log(this.state.width)
-  //     );
+  //     this.setState({ width: this.width.value });
   //   }
 
   //   if (this.height.value !== "") {
@@ -52,7 +50,17 @@ class App extends React.Component {
     this.setState({ height: e.target.value });
   };
 
-  onVideoSelect = () => {};
+  onVideoSelect = (videoId) => {
+    this.setState({ selected_video: videoId }, () =>
+      console.log(this.state.selected_video)
+    );
+  };
+
+  onClickAddBtn = () => {
+    if (this.state.number_of_video < 4) {
+      this.setState({ number_of_video: this.state.number_of_video + 1 });
+    }
+  };
 
   renderVideo = (videos) => {
     let video_arr = [];
@@ -62,19 +70,25 @@ class App extends React.Component {
         <DraggableItem
           width={this.state.width}
           height={this.state.height}
-          videoURL={""}
+          videoURL={this.state.displayed_video.video1.url}
+          videoId={"video1"}
+          onClick={this.onVideoSelect}
         />
       );
-    } else {
+    } else if (this.state.number_of_video <= 4) {
+      let i = 1;
       for (const property in videos) {
-        if (videos[property] !== "") {
+        if (i <= this.state.number_of_video) {
           video_arr.push(
             <DraggableItem
               width={this.state.width}
               height={this.state.height}
-              videoURL={videos[property]}
+              videoURL={videos[property].url}
+              videoId={`video${i}`}
+              onClick={this.onVideoSelect}
             />
           );
+          i = i + 1;
         }
       }
     }
@@ -85,7 +99,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <Navbar />
+        <Navbar onClickAddBtn={this.onClickAddBtn} />
         <div className="video-container">
           {this.renderVideo(this.state.displayed_video)}
         </div>

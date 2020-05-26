@@ -9,12 +9,16 @@ class DraggableItem extends React.Component {
       <Draggable handle=".drag-here" {...dragHandlers}>
         <div className="draggable-video-container">
           <div className="corner">
-            <i class="drag-here fas fa-arrows-alt fa-2x" />
+            <i
+              class="drag-here fas fa-arrows-alt fa-2x"
+              onClick={() => this.props.onClick(this.props.videoId)}
+            />
             <form>
               <input
                 className="video-url"
                 type="text"
                 placeholder="Place your Youtube URL here"
+                onClick={() => this.props.onClick(this.props.videoId)}
               />
             </form>
             <i className="delete fas fa-minus-square fa-2x" />

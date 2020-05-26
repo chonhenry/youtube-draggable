@@ -24,7 +24,9 @@ class Navbar extends React.Component {
             min="1"
             max="4"
           /> */}
-          <div className="add-btn">Add</div>
+          <div className="add-btn" onClick={this.props.onClickAddBtn}>
+            Add
+          </div>
         </div>
 
         <div className="select-video">
