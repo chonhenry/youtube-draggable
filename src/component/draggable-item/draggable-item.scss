@@ -1,20 +1,16 @@
-// .empty {
-//   width: 200px;
-//   height: 200px;
-//   background: red;
-// }
-
 .draggable-video-container {
   position: absolute;
+
   .corner {
     display: flex;
     width: 300px;
     justify-content: space-between;
-    background: gray;
+    background: #64ffda;
+    color: #0a192f;
 
     .drag-here {
       cursor: all-scroll;
-      border-right: 1px solid black;
+      border-right: 1px solid #64ffda;
       font-size: 20px;
       padding: 5px 20px;
       display: flex;
@@ -34,15 +30,17 @@
         padding: 0 10px;
         border-width: 0;
         font-size: 12px;
-        border-top: 1px solid gray;
+        // border-top: 1px solid #64ffda;
         outline: none;
+        background-color: #0a192f;
+        color: #64ffda;
       }
     }
 
     .delete {
       padding: 5px 10px;
       cursor: pointer;
-      border-left: 1px solid black;
+      border-left: 1px solid #64ffda;
     }
   }
 
@@ -50,3 +48,4 @@
     border: none;
   }
 }
+
