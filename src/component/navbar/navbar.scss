@@ -11,14 +11,20 @@
     align-items: center;
   }
 
-  .video-qty {
+  .pick-video {
     background: yellow;
     text-align: center;
     margin: 5px 30px;
 
-    // .video-qty-input {
-    //   width: 50%;
-    // }
+    select {
+      width: 50%;
+    }
+  }
+
+  .video-qty {
+    background: yellow;
+    text-align: center;
+    margin: 5px 30px;
 
     .add-btn {
       width: 50%;

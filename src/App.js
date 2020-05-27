@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./App.css";
 import DraggableItem from "./component/draggable-item/draggable-item";
 import Navbar from "./component/navbar/navbar";
@@ -36,18 +35,18 @@ class App extends React.Component {
     // console.log(this.state.activeDrags);
   };
 
-  onWidthSliderChange = (e) => {
-    console.log(e.target.value);
-    this.setState({ width: e.target.value });
+  onWidthChange = (width) => {
+    this.setState({ width: width });
   };
 
-  onHeightSliderChange = (e) => {
-    console.log(e.target.value);
-    this.setState({ height: e.target.value });
+  onHeightChange = (height) => {
+    this.setState({ height: height });
   };
 
   onVideoSelect = (videoId) => {
-    this.setState({ selected_video: videoId });
+    this.setState({ selected_video: videoId }, () =>
+      console.log(this.state.selected_video)
+    );
 
     // console.log(
     //   ReactDOM.findDOMNode(this.refs[videoId]).getBoundingClientRect()
@@ -145,7 +144,12 @@ class App extends React.Component {
       <div className="container">
         <Navbar
           onClickAddBtn={this.onClickAddBtn}
+          onSelect={this.onVideoSelect}
           ref="UniqueElementIdentifier"
+          width={this.state.width}
+          height={this.state.height}
+          onWidthChange={this.onWidthChange}
+          onHeightChange={this.onHeightChange}
         />
         <div className="videos-container">{this.renderVideo()}</div>
       </div>
@@ -158,11 +162,6 @@ export default App;
 //
 //
 //
-////
-////
-////
-////
-////
 ////
 ////
 ////
