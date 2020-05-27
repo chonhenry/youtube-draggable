@@ -19,21 +19,11 @@ class App extends React.Component {
     //   video4: null,
     // },
     displayed_video: [
-      { id: "video1", url: "", x: 0, y: 0 },
-      { id: "video2", url: null, x: 0, y: 0 },
-      { id: "video3", url: null, x: 0, y: 0 },
-      { id: "video4", url: null, x: 0, y: 0 },
+      { id: "video1", url: "", ix: 0, iy: 0, z_index: 0 },
+      { id: "video2", url: null, ix: 50, iy: 50, z_index: 0 },
+      { id: "video3", url: null, ix: 100, iy: 100, z_index: 0 },
+      { id: "video4", url: null, ix: 150, iy: 150, z_index: 0 },
     ],
-  };
-
-  handleDrag = (e, ui) => {
-    const { x, y } = this.state.deltaPosition;
-    this.setState({
-      deltaPosition: {
-        x: x + ui.deltaX,
-        y: y + ui.deltaY,
-      },
-    });
   };
 
   onStart = () => {
@@ -61,9 +51,19 @@ class App extends React.Component {
       console.log(this.state.selected_video)
     );
 
-    console.log(
-      ReactDOM.findDOMNode(this.refs[videoId]).getBoundingClientRect()
-    );
+    // console.log(
+    //   ReactDOM.findDOMNode(this.refs[videoId]).getBoundingClientRect()
+    // );
+
+    let new_arr = this.state.displayed_video.map((video) => {
+      if (video.id === videoId) {
+        return { ...video, z_index: 100 };
+      } else {
+        return { ...video, z_index: 1 };
+      }
+    });
+
+    this.setState({ displayed_video: new_arr });
   };
 
   onClickDeleteBtn = (videoId) => {
@@ -87,19 +87,29 @@ class App extends React.Component {
     if (this.state.number_of_video < 4) {
       this.setState({ number_of_video: this.state.number_of_video + 1 });
 
+      let addedVideo;
+
       let new_arr = this.state.displayed_video;
       for (const property in new_arr) {
         if (new_arr[property].url === null) {
           new_arr[property].url = "";
+          addedVideo = new_arr[property].id;
           break;
         }
       }
 
-      this.setState({ displayed_video: new_arr });
+      this.setState({ displayed_video: new_arr }, () =>
+        this.onVideoSelect(addedVideo)
+      );
     }
   };
 
-  renderVideo = (videos) => {
+  onSubmit = (value, videoId) => {
+    console.log(`${value} | ${videoId}`);
+    //this.setState({ width: this.width.value });
+  };
+
+  renderVideo = () => {
     return this.state.displayed_video.map((video) => {
       if (video.url === "") {
         return (
@@ -111,9 +121,11 @@ class App extends React.Component {
             videoId={video.id}
             onSelect={this.onVideoSelect}
             onDeleteClick={this.onClickDeleteBtn}
+            onSubmit={this.onSubmit}
             ref={`${video.id}`}
-            x={this.state.x}
-            y={this.state.y}
+            ix={video.ix}
+            iy={video.iy}
+            z_index={video.z_index}
           />
         );
       }
@@ -127,9 +139,7 @@ class App extends React.Component {
           onClickAddBtn={this.onClickAddBtn}
           ref="UniqueElementIdentifier"
         />
-        <div className="videos-container">
-          {this.renderVideo(this.state.displayed_video)}
-        </div>
+        <div className="videos-container">{this.renderVideo()}</div>
       </div>
     );
   }

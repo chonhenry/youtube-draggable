@@ -3,6 +3,11 @@ import "./draggable-item.scss";
 import Draggable from "react-draggable";
 
 class DraggableItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.textInput = React.createRef();
+  }
+
   render() {
     const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
     return (
@@ -10,20 +15,32 @@ class DraggableItem extends React.Component {
         handle=".drag-here"
         {...dragHandlers}
         onDrag={this.props.handleDrag}
-        positionOffset={{ x: 20, y: 20 }}
+        positionOffset={{ x: this.props.ix, y: this.props.iy }}
       >
-        <div className="draggable-video-container">
+        <div
+          className="draggable-video-container"
+          style={{ zIndex: this.props.z_index }}
+        >
           <div className="corner">
             <i
               className="drag-here fas fa-arrows-alt fa-2x"
               onClick={() => this.props.onSelect(this.props.videoId)}
             />
-            <form>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                this.props.onSubmit(
+                  this.textInput.current.value,
+                  this.props.videoId
+                );
+              }}
+            >
               <input
                 className="video-url"
                 type="text"
                 placeholder="Place your Youtube URL here"
                 onClick={() => this.props.onSelect(this.props.videoId)}
+                ref={this.textInput}
               />
             </form>
             <i
