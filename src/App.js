@@ -10,7 +10,6 @@ class App extends React.Component {
     height: 400,
     number_of_video: 1,
     selected_video: "video1",
-    // https://www.youtube.com/embed/FSs_JYwnAdI
     // displayed_video: {
     //   video1: { id: "video1", url: "", ix: 0, iy: 0, z_index: 0 },
     //   video2: { id: "video2", url: null, ix: 50, iy: 50, z_index: 0 },
@@ -18,10 +17,10 @@ class App extends React.Component {
     //   video4: { id: "video4", url: null, ix: 150, iy: 150, z_index: 0 },
     // },
     displayed_video: [
-      { id: "video1", url: "", ix: 0, iy: 0, z_index: 0 },
-      { id: "video2", url: null, ix: 50, iy: 50, z_index: 0 },
-      { id: "video3", url: null, ix: 100, iy: 100, z_index: 0 },
-      { id: "video4", url: null, ix: 150, iy: 150, z_index: 0 },
+      { id: "video1", url: "", ix: 0, iy: 0, z_index: 0, error_msg: "" },
+      { id: "video2", url: null, ix: 50, iy: 50, z_index: 0, error_msg: "" },
+      { id: "video3", url: null, ix: 100, iy: 100, z_index: 0, error_msg: "" },
+      { id: "video4", url: null, ix: 150, iy: 150, z_index: 0, error_msg: "" },
     ],
   };
 
@@ -44,9 +43,7 @@ class App extends React.Component {
   };
 
   onVideoSelect = (videoId) => {
-    this.setState({ selected_video: videoId }, () =>
-      console.log(this.state.selected_video)
-    );
+    this.setState({ selected_video: videoId });
 
     // console.log(
     //   ReactDOM.findDOMNode(this.refs[videoId]).getBoundingClientRect()
@@ -102,18 +99,34 @@ class App extends React.Component {
   };
 
   onSubmit = (value, videoId) => {
-    console.log(`${value.split("v=")[1].substring(0, 11)} | ${videoId}`);
-    let new_arr = this.state.displayed_video.map((video) => {
-      if (video.id === videoId) {
-        return { ...video, url: value.split("v=")[1].substring(0, 11) };
-      } else {
-        return video;
-      }
-    });
+    // console.log(`${value.split("v=")[1].substring(0, 11)} | ${videoId}`);
+    // www.youtube.com/watch?v=
 
-    this.setState({ displayed_video: new_arr }, () =>
-      console.log(this.state.displayed_video)
-    );
+    if (value.includes("www.youtube.com/watch?v=")) {
+      let new_arr = this.state.displayed_video.map((video) => {
+        if (video.id === videoId) {
+          return { ...video, url: value.split("v=")[1].substring(0, 11) };
+        } else {
+          return video;
+        }
+      });
+
+      this.setState({ displayed_video: new_arr });
+    } else if (value.includes("https://youtu.be/")) {
+      let new_arr = this.state.displayed_video.map((video) => {
+        if (video.id === videoId) {
+          return { ...video, url: value.split("be/")[1].substring(0, 11) };
+        } else {
+          return video;
+        }
+      });
+
+      this.setState({ displayed_video: new_arr });
+    } else {
+      alert(
+        "Please enter a valid Youtube link, such as https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      );
+    }
   };
 
   renderVideo = () => {
