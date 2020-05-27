@@ -17,21 +17,19 @@ class App extends React.Component {
     //   video4: { id: "video4", url: null, ix: 150, iy: 150, z_index: 0 },
     // },
     displayed_video: [
-      { id: "video1", url: "", ix: 0, iy: 0, z_index: 0, error_msg: "" },
-      { id: "video2", url: null, ix: 50, iy: 50, z_index: 0, error_msg: "" },
-      { id: "video3", url: null, ix: 100, iy: 100, z_index: 0, error_msg: "" },
-      { id: "video4", url: null, ix: 150, iy: 150, z_index: 0, error_msg: "" },
+      { id: "video1", url: "", ix: 0, iy: 0, z_index: 0 },
+      { id: "video2", url: null, ix: 50, iy: 50, z_index: 0 },
+      { id: "video3", url: null, ix: 100, iy: 100, z_index: 0 },
+      { id: "video4", url: null, ix: 150, iy: 150, z_index: 0 },
     ],
   };
 
   onStart = () => {
     this.setState({ activeDrags: ++this.state.activeDrags });
-    // console.log(this.state.activeDrags);
   };
 
   onStop = () => {
     this.setState({ activeDrags: --this.state.activeDrags });
-    // console.log(this.state.activeDrags);
   };
 
   onWidthChange = (width) => {
@@ -71,10 +69,7 @@ class App extends React.Component {
       }
     }
 
-    this.setState(
-      { displayed_video: new_arr },
-      console.log(this.state.displayed_video)
-    );
+    this.setState({ displayed_video: new_arr });
   };
 
   onClickAddBtn = () => {
@@ -99,9 +94,6 @@ class App extends React.Component {
   };
 
   onSubmit = (value, videoId) => {
-    // console.log(`${value.split("v=")[1].substring(0, 11)} | ${videoId}`);
-    // www.youtube.com/watch?v=
-
     if (value.includes("www.youtube.com/watch?v=")) {
       let new_arr = this.state.displayed_video.map((video) => {
         if (video.id === videoId) {
@@ -175,13 +167,6 @@ export default App;
 //
 //
 //
-////
-////
-////
-////
-////
-////
-////
 //
 //
 {
