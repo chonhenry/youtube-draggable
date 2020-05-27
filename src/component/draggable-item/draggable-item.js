@@ -53,7 +53,11 @@ class DraggableItem extends React.Component {
             className="youtube-video"
             width={this.props.width}
             height={this.props.height}
-            src={this.props.videoURL}
+            src={
+              this.props.videoURL !== ""
+                ? `https://www.youtube.com/embed/${this.props.videoURL}`
+                : ""
+            }
           ></iframe>
         </div>
       </Draggable>
